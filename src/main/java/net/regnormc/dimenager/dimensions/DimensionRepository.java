@@ -99,6 +99,18 @@ public class DimensionRepository extends GeneratedAndConfiguredRepository<Genera
 		});
 	}
 
+	public int importDimension(ServerCommandSource source, Identifier identifier, DimensionType dimensionType, Identifier dimensionTypeIdentifier, Generator generator) {
+		if (items.containsKey(identifier)) {
+			source.sendError(new LiteralText("A dimension with id '" + identifier + "' already exists"));
+			return 0;
+		}
+		GeneratedDimension dimension = new GeneratedDimension(identifier, generatedDirectory, true, dimensionType, dimensionTypeIdentifier, generator);
+		addGeneratedItem(dimension);
+		load(source, dimension);
+		source.sendFeedback(new LiteralText("Imported dimension with id '" + identifier + "'"), true);
+		return 1;
+	}
+
 	public int createDimension(ServerCommandSource source, Identifier identifier, DimensionType dimensionType, Identifier dimensionTypeIdentifier, Generator generator) {
 		if (items.containsKey(identifier)) {
 			source.sendError(new LiteralText("A dimension with id '" + identifier + "' already exists"));

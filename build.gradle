@@ -7,7 +7,7 @@ targetCompatibility = JavaVersion.VERSION_1_8
 
 archivesBaseName = 'dimenager'
 group = 'net.regnormc'
-version = '0.0.1'
+version = '0.0.2'
 
 Set<String> apiModules = [
         "fabric-api-base",
